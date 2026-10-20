@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Clothesline Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>☀ SmartLine</h2>
+        <p class="subtitle">CLOTHESLINE CONTROL</p>
+
+        <nav>
+            <a href="#" class="active">Dashboard</a>
+            <a href="#status">Device Status</a>
+            <a href="#weather">Weather</a>
+            <a href="#settings">Settings</a>
+        </nav>
+
+        <div class="connection">
+            <span class="dot"></span>
+            Demo Mode
+            <small>Simulated data</small>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header>
+            <div>
+                <p class="eyebrow">SMART HOME / CLOTHESLINE</p>
+                <h1>Dashboard</h1>
+                <p class="muted">Welcome! Here's your clothesline overview.</p>
+            </div>
+            <div class="device-badge" id="api-status">
+    Connecting to API...
+</div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <p class="eyebrow">YOUR SMART CLOTHESLINE</p>
+                <h2>Let technology<br>take care of your laundry.</h2>
+                <p>Monitor conditions and protect your clothes from unexpected rain.</p>
+                <button type="button" onclick="alert('Demo only: device control is not connected yet.')">
+                    Test Device
+                </button>
+            </div>
+            <div class="hero-icon">☀️</div>
+        </section>
+
+        <section class="stats" id="status">
+            <article class="card">
+                <p>Clothesline Status</p>
+                <h3><span class="status-dot green"></span> Extended</h3>
+                <small>Sample status</small>
+            </article>
+
+            <article class="card" id="weather">
+                <p>Weather Condition</p>
+                <h3>☀️ Sunny</h3>
+                <small>Simulated weather</small>
+            </article>
+
+            <article class="card">
+                <p>Rain Sensor</p>
+                <h3><span class="status-dot green"></span> No Rain</h3>
+                <small>Sample sensor reading</small>
+            </article>
+
+            <article class="card">
+                <p>Device Connection</p>
+                <h3>Demo Mode</h3>
+                <small>Arduino not connected</small>
+            </article>
+        </section>
+
+        <section class="panel" id="settings">
+            <div class="panel-heading">
+                <div>
+                    <h2>Clothesline Control</h2>
+                    <p class="muted">Preview of the device controls.</p>
+                </div>
+                <span class="demo-label">SIMULATION</span>
+            </div>
+
+            <div class="control-row">
+                <div>
+                    <strong>Extend Clothesline</strong>
+                    <p class="muted">Move the clothesline outside.</p>
+                </div>
+                <button class="secondary" onclick="alert('Demo only: Arduino is not connected.')">
+                    Extend
+                </button>
+            </div>
+
+            <div class="control-row">
+                <div>
+                    <strong>Retract Clothesline</strong>
+                    <p class="muted">Protect clothes from the rain.</p>
+                </div>
+                <button class="primary" onclick="alert('Demo only: Arduino is not connected.')">
+                    Retract
+                </button>
+            </div>
+        </section>
+
+        
+        <footer>
+            Smart Clothesline System · Frontend Prototype
+        </footer>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
+
