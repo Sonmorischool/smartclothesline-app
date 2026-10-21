@@ -67,5 +67,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("store-btn")?.addEventListener("click", () => {
         sendCommand("STORE");
     });
-
 });
+
+// Register the service worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js")
+            .then(() => {
+                console.log("SmartLine service worker registered.");
+            })
+            .catch(error => {
+                console.error(
+                    "Service worker registration failed:",
+                    error
+                );
+            });
+    });
+}
