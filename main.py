@@ -1,4 +1,3 @@
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -19,27 +18,52 @@ app.add_middleware(
 class ClotheslineCommand(BaseModel):
     command: str
 
+
 # Store the latest command in memory for now
 latest_command = {"command": "STOP"}
+
+
+# Commands accepted by the system
+ALLOWED_COMMANDS = [
+    "EXTEND",
+    "RETRACT",
+    "STORE",
+    "STOP",
+]
+
 
 @app.get("/")
 def home():
     return {"message": "Smart Clothesline App is running!"}
 
+
 @app.post("/command")
 def send_command(data: ClotheslineCommand):
     global latest_command
 
-    if data.command not in ["EXTEND", "RETRACT", "STOP"]:
-        return {"success": False, "message": "Invalid command"}
+    command = data.command.strip().upper()
 
-    latest_command = {"command": data.command}
+    if command not in ALLOWED_COMMANDS:
+        return {
+            "success": False,
+            "message": f"Invalid command: {command}",
+        }
+
+    latest_command = {"command": command}
+
+    messages = {
+        "EXTEND": "Extend command received.",
+        "RETRACT": "Retract command received.",
+        "STORE": "Store clothes command received.",
+        "STOP": "Stop command received.",
+    }
 
     return {
         "success": True,
-        "message": f"Command received: {data.command}",
-        "command": data.command
+        "message": messages[command],
+        "command": command,
     }
+
 
 @app.get("/command")
 def get_command():

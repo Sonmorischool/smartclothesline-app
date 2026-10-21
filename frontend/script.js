@@ -1,21 +1,16 @@
+const API_URL = "https://smartclothesline-app.vercel.app";
 
-const API_URL = "https://smartclothesline-app.vercel.app/";
-
+// Check backend connection
 async function checkBackend() {
     const statusElement = document.getElementById("api-status");
 
-    if (!statusElement) {
-        console.error("Could not find the API status element.");
-        return;
-    }
-
-    statusElement.textContent = "Connecting to API...";
+    if (!statusElement) return;
 
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(`${API_URL}/`);
 
         if (!response.ok) {
-            throw new Error(`HTTP error: ${response.status}`);
+            throw new Error("Backend unavailable");
         }
 
         const data = await response.json();
@@ -23,12 +18,54 @@ async function checkBackend() {
         statusElement.textContent = "✓ API Connected";
         statusElement.title = data.message || "Backend is responding";
 
-        console.log("Backend response:", data);
     } catch (error) {
         statusElement.textContent = "✕ API Connection Failed";
+        statusElement.title = error.message;
 
         console.error("Backend connection error:", error);
     }
 }
 
-document.addEventListener("DOMContentLoaded", checkBackend);
+// Send command to backend
+async function sendCommand(command) {
+    try {
+        const response = await fetch(`${API_URL}/command`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ command })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            throw new Error(data.message || "Command failed");
+        }
+
+        alert(data.message || `Command sent: ${command}`);
+        console.log("Command response:", data);
+
+    } catch (error) {
+        console.error("Command error:", error);
+        alert(`Command failed: ${error.message}`);
+    }
+}
+
+// Connect dashboard buttons
+document.addEventListener("DOMContentLoaded", () => {
+    checkBackend();
+
+    document.getElementById("extend-btn")?.addEventListener("click", () => {
+        sendCommand("EXTEND");
+    });
+
+    document.getElementById("retract-btn")?.addEventListener("click", () => {
+        sendCommand("RETRACT");
+    });
+
+    document.getElementById("store-btn")?.addEventListener("click", () => {
+        sendCommand("STORE");
+    });
+
+});
