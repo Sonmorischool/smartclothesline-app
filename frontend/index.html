@@ -1,12 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Smart Clothesline Dashboard</title>
+
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#10243a">
+    <meta name="theme-color" content="#10243a">
 </head>
 <body>
 
@@ -15,11 +18,18 @@
         <p class="subtitle">CLOTHESLINE CONTROL</p>
 
         <nav>
-            <a href="#" class="active">Dashboard</a>
-            <a href="#status">Device Status</a>
-            <a href="#weather">Weather</a>
-            <a href="#controls">Controls</a>
-        </nav>
+    <a href="#dashboard" data-page="dashboard" class="active">
+        Dashboard
+    </a>
+
+    <a href="#status" data-page="status">
+        Device Status
+    </a>
+
+    <a href="#controls" data-page="controls">
+        Controls
+    </a>
+</nav>
 
         <div class="connection">
             <span class="dot"></span>
@@ -49,14 +59,15 @@
                 <p class="eyebrow">YOUR SMART CLOTHESLINE</p>
                 <h2>Let technology<br>take care of your laundry.</h2>
                 <p>
-                    Protect your clothes from unexpected rain
-                    with automatic and manual controls.
+                    Prepare your clothesline for changing weather
+                    and convenient scheduled operation.
                 </p>
             </div>
 
             <div class="hero-icon">☀️</div>
         </section>
 
+        <!-- DEVICE STATUS -->
         <section class="stats" id="status">
 
             <article class="card">
@@ -65,10 +76,10 @@
                 <small>Waiting for device data</small>
             </article>
 
-            <article class="card" id="weather">
+            <article class="card">
                 <p>Weather Condition</p>
-                <h3 id="weather-status">Unknown</h3>
-                <small>Sensor data not available</small>
+                <h3 id="weather-status">Awaiting Connection</h3>
+                <small>Live weather not connected</small>
             </article>
 
             <article class="card">
@@ -85,9 +96,188 @@
 
         </section>
 
-    
+        <!-- LIVE WEATHER FORECAST -->
+        <section class="panel" id="weather" hidden>
 
-        <section class="panel">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">WEATHER MONITORING</p>
+                    <h2>Live Weather Forecast</h2>
+                    <p class="muted">
+                        Check weather conditions before drying your clothes.
+                    </p>
+                </div>
+
+                <span class="demo-label">CONNECTION PENDING</span>
+            </div>
+
+            <div class="weather-overview">
+
+                <div class="weather-current">
+                    <p class="muted">Current Conditions</p>
+                    <div class="weather-main">
+                        <span class="weather-icon" id="weather-icon">🌤️</span>
+                        <div>
+                            <h2 id="weather-temperature">--°C</h2>
+                            <p id="weather-description">Awaiting weather data</p>
+                        </div>
+                    </div>
+                    <p class="muted" id="weather-location">
+                        Location: Not configured
+                    </p>
+                </div>
+
+                <div class="weather-metric">
+                    <span>🌧️</span>
+                    <p>Rain Probability</p>
+                    <h3 id="rain-probability">--%</h3>
+                </div>
+
+                <div class="weather-metric">
+                    <span>💨</span>
+                    <p>Wind Speed</p>
+                    <h3 id="wind-speed">-- km/h</h3>
+                </div>
+
+            </div>
+
+            <div class="forecast-section">
+                <h3>Hourly Forecast</h3>
+                <p class="muted">
+                    Upcoming weather conditions will appear here
+                    after the live forecast is connected.
+                </p>
+
+                <div class="forecast-grid" id="hourly-forecast">
+
+                    <article class="forecast-card">
+                        <p>Next Hour</p>
+                        <span>🌤️</span>
+                        <h3>--°C</h3>
+                        <small>Rain: --%</small>
+                    </article>
+
+                    <article class="forecast-card">
+                        <p>+2 Hours</p>
+                        <span>☁️</span>
+                        <h3>--°C</h3>
+                        <small>Rain: --%</small>
+                    </article>
+
+                    <article class="forecast-card">
+                        <p>+3 Hours</p>
+                        <span>🌧️</span>
+                        <h3>--°C</h3>
+                        <small>Rain: --%</small>
+                    </article>
+
+                    <article class="forecast-card">
+                        <p>+4 Hours</p>
+                        <span>🌤️</span>
+                        <h3>--°C</h3>
+                        <small>Rain: --%</small>
+                    </article>
+
+                </div>
+            </div>
+
+            <p class="notice">
+                Weather information is a preview only.
+                Live forecast data is not connected yet.
+            </p>
+
+        </section>
+
+        <!-- SCHEDULING TIMER -->
+        <section class="panel" id="schedule" hidden>
+
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">AUTOMATION</p>
+                    <h2>Scheduling Timer</h2>
+                    <p class="muted">
+                        Plan when your clothesline should operate.
+                    </p>
+                </div>
+
+                <span class="demo-label">NOT ACTIVE YET</span>
+            </div>
+
+            <form id="schedule-form">
+
+                <div class="schedule-grid">
+
+                    <div class="form-group">
+                        <label for="schedule-command">
+                            Scheduled Action
+                        </label>
+
+                        <select id="schedule-command" name="command" required>
+                            <option value="EXTEND">Extend Clothesline</option>
+                            <option value="RETRACT">Retract Clothesline</option>
+                            <option value="STORE">Store Clothes</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="schedule-date">Date</label>
+                        <input
+                            type="date"
+                            id="schedule-date"
+                            name="date"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="schedule-time">Time</label>
+                        <input
+                            type="time"
+                            id="schedule-time"
+                            name="time"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="schedule-repeat">Repeat</label>
+                        <select id="schedule-repeat" name="repeat">
+                            <option value="once">Once</option>
+                            <option value="daily">Every day</option>
+                            <option value="weekly">Every week</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="schedule-safety">
+                    <strong>🌦️ Weather protection</strong>
+                    <p class="muted">
+                        Weather-aware scheduling can be added later.
+                        Rain protection must take priority over extending
+                        the clothesline when the control system is connected.
+                    </p>
+                </div>
+
+                <button type="button" class="primary" id="save-schedule-btn" disabled>
+                    Scheduling Coming Soon
+                </button>
+
+            </form>
+
+            <div class="scheduled-list">
+                <h3>Scheduled Tasks</h3>
+                <p class="muted" id="schedule-empty">
+                    No schedules saved. Scheduling has not been activated.
+                </p>
+
+                <div id="schedule-list"></div>
+            </div>
+
+        </section>
+
+        <!-- CLOTHESLINE CONTROLS -->
+        <section class="panel" id="controls">
 
             <div class="panel-heading">
                 <div>
@@ -96,6 +286,7 @@
                         Send movement commands to the API.
                     </p>
                 </div>
+
                 <span class="demo-label">HARDWARE OFFLINE</span>
             </div>
 
@@ -123,31 +314,34 @@
 
         </section>
 
-   <section class="panel" id="storage">
+        <!-- CLOTHES STORAGE -->
+        <section class="panel" id="storage">
 
-    <div class="panel-heading">
-        <div>
-            <h2>Clothes Storage</h2>
-            <p class="muted">
-                Move your clothes safely into the storage container.
-            </p>
-        </div>
-    </div>
+            <div class="panel-heading">
+                <div>
+                    <h2>Clothes Storage</h2>
+                    <p class="muted">
+                        Move your clothes safely into the storage container.
+                    </p>
+                </div>
+            </div>
 
-    <div class="control-row">
-        <div>
-            <strong>Store Clothes</strong>
-            <p class="muted">
-                Open the container, move the clothes inside, and close it.
-            </p>
-        </div>
+            <div class="control-row">
+                <div>
+                    <strong>Store Clothes</strong>
+                    <p class="muted">
+                        Open the container, move the clothes inside,
+                        and close it.
+                    </p>
+                </div>
 
-        <button type="button" class="primary" id="store-btn">
-            Store Clothes
-        </button>
-    </div>
+                <button type="button" class="primary" id="store-btn">
+                    Store Clothes
+                </button>
+            </div>
 
-</section>
+        </section>
+
         <footer>
             Smart Clothesline System · Dashboard Prototype
         </footer>

@@ -328,3 +328,117 @@ footer {
         align-items: flex-start;
     }
 }
+
+
+
+/* =====================================
+   FUTURE FEATURES — HIDDEN FOR NOW
+   ===================================== */
+
+#weather,
+#schedule {
+    display: none !important;
+}
+
+/* Future weather forecast styling */
+.weather-overview {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.weather-current,
+.weather-metric,
+.forecast-card {
+    background: #f4f7fb;
+    border: 1px solid #e4eaf1;
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.weather-icon {
+    font-size: 42px;
+}
+
+.forecast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.forecast-card {
+    text-align: center;
+}
+
+.forecast-card h3 {
+    margin: 10px 0;
+}
+
+/* Future scheduling timer styling */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: bold;
+    color: #24415e;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d6e0eb;
+    border-radius: 8px;
+    background: white;
+    color: #172b4d;
+    font: inherit;
+}
+
+.schedule-safety {
+    background: #eef5fb;
+    border-radius: 8px;
+    padding: 14px;
+    color: #24415e;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.scheduled-list {
+    margin-top: 20px;
+}
+
+/* Mobile layout for future features */
+@media (max-width: 700px) {
+    .weather-overview,
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .forecast-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Separate navigation views */
+[hidden] {
+    display: none !important;
+}
